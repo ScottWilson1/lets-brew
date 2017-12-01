@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Beer Diary</string>
+    <string name="beer_name">Beer Name</string>
+    <string name="brew_date">Brew Date</string>
+    <string name="beer_type">Beer Type</string>
+    <string name="notes">Notes</string>
+</resources>

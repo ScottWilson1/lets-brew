@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="beer_styles">
+        <item>"Select Beer Style"</item>
+        <item>"IPA"</item>
+        <item>"Wheat"</item>
+        <item>"Amber"</item>
+        <item>"Porter"</item>
+        <item>"Stout"</item>
+    </array>
+</resources>
