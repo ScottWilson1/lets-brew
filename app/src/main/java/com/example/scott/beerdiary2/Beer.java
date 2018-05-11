@@ -12,20 +12,26 @@ import static java.lang.Integer.parseInt;
 
 public class Beer {
     private String name;
-    private String date;
+    private String brewDate;
+    private String secondaryFermentationDate;
+    private String bottlingOrKeggingDate;
     private int style;
-    private String hopName;
-    private String hopAmount;
-    private ArrayList<Hops> bitteringHops;
-    private ArrayList<Hops> flavorHops;
-    private ArrayList<Hops> aromaHops;
-    private ArrayList<Hops> knockOutHops;
-    private ArrayList<Hops> dryHops;
+    private ArrayList<Hops> bitteringHops = new ArrayList<>();
+    private ArrayList<Hops> flavorHops = new ArrayList<>();
+    private ArrayList<Hops> aromaHops = new ArrayList<>();
+    private ArrayList<Hops> knockOutHops = new ArrayList<>();
+    private ArrayList<Hops> dryHops = new ArrayList<>();
     private String preboilGravity;
     private String originalGravity;
     private String finalGravity;
     private String ABV = "";
     private String notes;
+    public enum HopsType {
+        BITTERING, FLAVOR, AROMA, KNOCKOUT, DRY
+    }
+    public enum dateType {
+        BREW, SECONDARY, BOTTINGKEGGING
+    }
 
     public String getName() {
         return name;
@@ -35,12 +41,28 @@ public class Beer {
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getBrewDate() {
+        return brewDate;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setBrewDate(String date) {
+        this.brewDate = date;
+    }
+
+    public String getSecondaryFermentationDate() {
+        return secondaryFermentationDate;
+    }
+
+    public void setSecondaryFermentationDate(String secondaryFermentationDate) {
+        this.secondaryFermentationDate = secondaryFermentationDate;
+    }
+
+    public String getBottlingOrKeggingDate() {
+        return bottlingOrKeggingDate;
+    }
+
+    public void setBottlingOrKeggingDate(String bottlingOrKeggingDate) {
+        this.bottlingOrKeggingDate = bottlingOrKeggingDate;
     }
 
     public int getStyle() {
@@ -51,60 +73,44 @@ public class Beer {
         this.style = style;
     }
 
-    public String getHopName() {
-        return hopName;
-    }
-
-    public void setHopName(String hopName) {
-        this.hopName = hopName;
-    }
-
-    public String getHopAmount() {
-        return hopAmount;
-    }
-
-    public void setHopAmount(String hopAmount) {
-        this.hopAmount = hopAmount;
+    public void setHops(HopsType hopsType, Hops hops) {
+        switch(hopsType) {
+            case BITTERING:
+                this.bitteringHops.add(hops);
+                break;
+            case AROMA:
+                this.aromaHops.add(hops);
+                break;
+            case FLAVOR:
+                this.flavorHops.add(hops);
+                break;
+            case KNOCKOUT:
+                this.knockOutHops.add(hops);
+                break;
+            case DRY:
+                this.dryHops.add(hops);
+                break;
+        }
     }
 
     public ArrayList<Hops> getBitteringHops() {
         return bitteringHops;
     }
 
-    public void setBitteringHops(Hops hops) {
-        this.bitteringHops.add(hops);
-    }
-
     public ArrayList<Hops> getFlavorHops() {
         return flavorHops;
-    }
-
-    public void setFlavorHops(Hops hops) {
-        this.flavorHops.add(hops);
     }
 
     public ArrayList<Hops> getAromaHops() {
         return aromaHops;
     }
 
-    public void setAromaHops(Hops hops) {
-        this.aromaHops.add(hops);
-    }
-
     public ArrayList<Hops> getKnockOutHops() {
         return knockOutHops;
     }
 
-    public void setKnockOutHops(Hops hops) {
-        this.knockOutHops.add(hops);
-    }
-
     public ArrayList<Hops> getDryHops() {
         return dryHops;
-    }
-
-    public void setDryHops(Hops hops) {
-        this.dryHops.add(hops);
     }
 
     public String getNotes() {
