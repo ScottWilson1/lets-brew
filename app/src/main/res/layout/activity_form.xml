@@ -33,7 +33,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:onClick="onClickBrewDateInput"
+                android:onClick="onClickDateInput"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="#555555"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/secondary_fermentation_date"/>
+            <TextView
+                android:id="@+id/secondary_fermentation_date_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:onClick="onClickDateInput"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="10dp"
+                android:background="#555555"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/bottling_or_kegging_date"/>
+            <TextView
+                android:id="@+id/bottling_or_kegging_date_input"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:onClick="onClickDateInput"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"/>
             <View
@@ -79,24 +115,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                        <EditText
-                            android:id="@+id/bittering_hops_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="8"/>
-                        <EditText
-                            android:id="@+id/bittering_hops_amount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="OZ"
-                            android:layout_weight="1"/>
-                </LinearLayout>
+                    android:orientation="horizontal"/>
             </LinearLayout>
 
 
@@ -123,24 +142,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                        <EditText
-                            android:id="@+id/flavor_hops_name"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="8"/>
-                        <EditText
-                            android:id="@+id/flavor_hops_amount"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="numberDecimal"
-                            android:layout_weight="1"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="OZ"
-                            android:layout_weight="1"/>
-                </LinearLayout>
+                    android:orientation="horizontal"/>
             </LinearLayout>
 
             <LinearLayout
@@ -166,24 +168,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:id="@+id/aroma_hops_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"/>
-                    <EditText
-                        android:id="@+id/aroma_hops_amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="OZ"
-                        android:layout_weight="1"/>
-                </LinearLayout>
+                    android:orientation="horizontal"/>
             </LinearLayout>
 
             <LinearLayout
@@ -209,24 +194,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:id="@+id/knockout_hops_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"/>
-                    <EditText
-                        android:id="@+id/knockout_hops_amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="OZ"
-                        android:layout_weight="1"/>
-                </LinearLayout>
+                    android:orientation="horizontal"/>
             </LinearLayout>
 
             <LinearLayout
@@ -252,24 +220,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <EditText
-                        android:id="@+id/dry_hops_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="8"/>
-                    <EditText
-                        android:id="@+id/dry_hops_amount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:inputType="numberDecimal"
-                        android:layout_weight="1"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="OZ"
-                        android:layout_weight="1"/>
-                </LinearLayout>
+                    android:orientation="horizontal"/>
             </LinearLayout>
 
             <TextView

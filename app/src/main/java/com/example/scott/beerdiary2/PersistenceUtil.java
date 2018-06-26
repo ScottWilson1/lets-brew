@@ -1,6 +1,9 @@
 package com.example.scott.beerdiary2;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -14,6 +17,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
+import static android.content.Context.*;
 
 /**
  * Created by Scott on 5/25/17.
@@ -29,7 +34,7 @@ public class PersistenceUtil {
         String json = gson.toJson(beerlist);
         Log.d(TAG, json);
 
-        try (FileOutputStream fos = context.openFileOutput(FILENAME, Context.MODE_PRIVATE)) {
+        try (FileOutputStream fos = context.openFileOutput(FILENAME, MODE_PRIVATE)) {
             fos.write(json.getBytes());
         } catch (FileNotFoundException e) {
             e.printStackTrace();

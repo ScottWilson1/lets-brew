@@ -60,7 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.BeerVi
             String[] beerStyles = mContext.getResources().getStringArray(R.array.beer_styles);
             mItemType.setText(beerStyles[beer.getStyle()]);
             //mItemAbv.setText(beer.getAbv());
-            mItemDate.setText(beer.getDate());
+            mItemDate.setText(beer.getBrewDate());
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

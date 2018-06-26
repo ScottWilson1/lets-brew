@@ -54,6 +54,9 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
 
     private EditText beerNameInput;
     private TextView brewDateInput;
+    private TextView secondaryFermentationDateInput;
+    private TextView bottlingOrKeggingDateInput;
+    private TextView currentDateInput;
     private Spinner beerStyleDropdown;
     private LinearLayout bitteringHopsList;
     private Button addBitteringHopsButton;
@@ -65,16 +68,6 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
     private Button addKnockOutHopsButton;
     private LinearLayout dryHopsList;
     private Button addDryHopsButton;
-    private EditText bitteringHopsNameInput;
-    private EditText bitteringHopsAmountInput;
-    private EditText flavorHopsNameInput;
-    private EditText flavorHopsAmountInput;
-    private EditText aromaHopsNameInput;
-    private EditText aromaHopsAmountInput;
-    private EditText knockOutsHopNameInput;
-    private EditText knockOutsHopAmountInput;
-    private EditText dryHopsNameInput;
-    private EditText dryHopsAmountInput;
     private EditText preboilGravityInput;
     private CustomEditText originalGravityInput;
     private EditText finalGravityInput;
@@ -97,26 +90,18 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
         beerNameInput = (EditText) findViewById(R.id.beer_name_input);
         beerStyleDropdown = (Spinner) findViewById(R.id.beer_style_dropdown);
         brewDateInput = (TextView) findViewById(R.id.brew_date_input);
+        secondaryFermentationDateInput = (TextView) findViewById(R.id.secondary_fermentation_date_input);
+        bottlingOrKeggingDateInput = (TextView) findViewById(R.id.bottling_or_kegging_date_input);
         bitteringHopsList = (LinearLayout) findViewById(R.id.bittering_hops_list);
         addBitteringHopsButton = (Button) findViewById(R.id.add_bittering_hops_button);
-        bitteringHopsNameInput = (EditText) findViewById(R.id.hop_name);
-        bitteringHopsAmountInput = (EditText) findViewById(R.id.hop_amount);
         flavorHopsList = (LinearLayout) findViewById(R.id.flavor_hops_list);
         addFlavorHopsButton = (Button) findViewById(R.id.add_flavor_hops_button);
-        flavorHopsNameInput = (EditText) findViewById(R.id.flavor_hops_name);
-        flavorHopsAmountInput = (EditText) findViewById(R.id.flavor_hops_amount);
         aromaHopsList = (LinearLayout) findViewById(R.id.aroma_hops_list);
         addAromaHopsButton = (Button) findViewById(R.id.add_aroma_hops_button);
-        aromaHopsNameInput = (EditText) findViewById(R.id.aroma_hops_name);
-        aromaHopsAmountInput = (EditText) findViewById(R.id.aroma_hops_amount);
         knockOutHopsList = (LinearLayout) findViewById(R.id.knockout_hops_list);
         addKnockOutHopsButton = (Button) findViewById(R.id.add_knockout_hops_button);
-        knockOutsHopNameInput = (EditText) findViewById(R.id.knockout_hops_name);
-        knockOutsHopAmountInput = (EditText) findViewById(R.id.knockout_hops_amount);
         dryHopsList = (LinearLayout) findViewById(R.id.dry_hops_list);
         addDryHopsButton = (Button) findViewById(R.id.add_dry_hops_button);
-        dryHopsNameInput = (EditText) findViewById(R.id.dry_hops_name);
-        dryHopsAmountInput = (EditText) findViewById(R.id.dry_hops_amount);
         preboilGravityInput = (EditText) findViewById(R.id.preboil_gravity);
         originalGravityInput = (CustomEditText) findViewById(R.id.original_gravity);
         finalGravityInput = (EditText) findViewById(R.id.final_gravity);
@@ -176,22 +161,49 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
 
         position = getIntent().getIntExtra("POSITION", -1);
         if (position == -1) {
-            showDate();
+            //showDate();
+            inflateEmptyHopRow(bitteringHopsList, inflater);
+            inflateEmptyHopRow(flavorHopsList, inflater);
+            inflateEmptyHopRow(aromaHopsList, inflater);
+            inflateEmptyHopRow(knockOutHopsList, inflater);
+            inflateEmptyHopRow(dryHopsList, inflater);
         } else {
             ArrayList<Beer> tempBeerList = PersistenceUtil.loadBeers(this);
             Beer tempBeer = tempBeerList.get(position);
             beerNameInput.setText(tempBeer.getName());
             beerStyleDropdown.setSelection(tempBeer.getStyle());
-            brewDateInput.setText(tempBeer.getDate());
-            listHops(tempBeer.getBitteringHops(), bitteringHopsList, inflater);
-            listHops(tempBeer.getFlavorHops(), flavorHopsList, inflater);
-            listHops(tempBeer.getAromaHops(), aromaHopsList, inflater);
-            listHops(tempBeer.getKnockOutHops(), knockOutHopsList, inflater);
-            listHops(tempBeer.getDryHops(), dryHopsList, inflater);
+            brewDateInput.setText(tempBeer.getBrewDate());
+            secondaryFermentationDateInput.setText(tempBeer.getSecondaryFermentationDate());
+            bottlingOrKeggingDateInput.setText(tempBeer.getBottlingOrKeggingDate());
+            if (tempBeer.getBitteringHops().isEmpty()) {
+                inflateEmptyHopRow(bitteringHopsList, inflater);
+            } else {
+                listHops(tempBeer.getBitteringHops(), bitteringHopsList, inflater);
+            }
+            if (tempBeer.getFlavorHops().isEmpty()) {
+                inflateEmptyHopRow(flavorHopsList, inflater);
+            } else {
+                listHops(tempBeer.getFlavorHops(), flavorHopsList, inflater);
+            }
+            if (tempBeer.getAromaHops().isEmpty()) {
+                inflateEmptyHopRow(aromaHopsList, inflater);
+            } else {
+                listHops(tempBeer.getAromaHops(), aromaHopsList, inflater);
+            }
+            if (tempBeer.getKnockOutHops().isEmpty()) {
+                inflateEmptyHopRow(knockOutHopsList, inflater);
+            } else {
+                listHops(tempBeer.getKnockOutHops(), knockOutHopsList, inflater);
+            }
+            if (tempBeer.getDryHops().isEmpty()) {
+                inflateEmptyHopRow(dryHopsList, inflater);
+            } else {
+                listHops(tempBeer.getDryHops(), dryHopsList, inflater);
+            }
             preboilGravityInput.setText(tempBeer.getPreboilGravity());
             originalGravityInput.setText(tempBeer.getOriginalGravity());
             finalGravityInput.setText(tempBeer.getFinalGravity());
-            aBV.setText(tempBeer.getABV() + "%");
+            aBV.setText(tempBeer.getABV());
             notesInput.setText(tempBeer.getNotes());
         }
 
@@ -199,16 +211,17 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
         saveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 tempBeer.setName(beerNameInput.getText().toString());
-                tempBeer.setDate(brewDateInput.getText().toString());
+                tempBeer.setBrewDate(brewDateInput.getText().toString());
+                tempBeer.setSecondaryFermentationDate(secondaryFermentationDateInput.getText().toString());
+                tempBeer.setBottlingOrKeggingDate(bottlingOrKeggingDateInput.getText().toString());
                 if (styleSelected != 0) {
                     tempBeer.setStyle(styleSelected);
                 }
-                int count = bitteringHopsList.getChildCount();
-                for(int i = 0; i < count; i++) {
-                    LinearLayout hopsRow = (LinearLayout) bitteringHopsList.getChildAt(i);
-                }
-//                tempBeer.setHopName(hopNameInput.getText().toString());
-//                tempBeer.setHopAmount(hopAmountInput.getText().toString());
+                getHopsOutOfLinearLayout(bitteringHopsList, Beer.HopsType.BITTERING);
+                getHopsOutOfLinearLayout(aromaHopsList, Beer.HopsType.AROMA);
+                getHopsOutOfLinearLayout(flavorHopsList, Beer.HopsType.FLAVOR);
+                getHopsOutOfLinearLayout(knockOutHopsList, Beer.HopsType.KNOCKOUT);
+                getHopsOutOfLinearLayout(dryHopsList, Beer.HopsType.DRY);
                 tempBeer.setPreboilGravity(preboilGravityInput.getText().toString());
                 tempBeer.setOriginalGravity(originalGravityInput.getText().toString());
                 tempBeer.setFinalGravity(finalGravityInput.getText().toString());
@@ -256,7 +269,8 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
 
     }
 
-    public void onClickBrewDateInput(View v) {
+    public void onClickDateInput(View v) {
+        currentDateInput = (TextView) v;
         DatePickerDialog dialog = new DatePickerDialog(this, this, year, month, day);
         dialog.show();
     }
@@ -273,7 +287,7 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
         DateFormat df = new SimpleDateFormat("yy"); // Just the year, with 2 digits
         String yearText = df.format(c.getTime());
         String date = (month + 1 ) + "/" + day + "/" + yearText;
-        brewDateInput.setText(date);
+        currentDateInput.setText(date);
     }
 
     @Override
@@ -284,14 +298,42 @@ public class FormActivity extends AppCompatActivity implements DatePickerDialog.
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
+    private void inflateEmptyHopRow (LinearLayout hopsLayout, LayoutInflater inflater) {
+        LinearLayout hop_row = (LinearLayout) inflater.inflate(R.layout.hop_row_layout, null);
+        hopsLayout.addView(hop_row);
+    }
+
     private void listHops (ArrayList<Hops> hopList, LinearLayout hopsLayout, LayoutInflater inflater) {
         for(int i = 0; i < hopList.size(); i++) {
             LinearLayout hop_row = (LinearLayout) inflater.inflate(R.layout.hop_row_layout, null);
             hopsLayout.addView(hop_row);
-            EditText hopNameInput = (EditText) findViewById(R.id.hop_name);
-            EditText hopAmountInput = (EditText) findViewById(R.id.hop_amount);
+            EditText hopNameInput = (EditText) hop_row.getChildAt(0);
+            EditText hopAmountInput = (EditText) hop_row.getChildAt(1);
             hopNameInput.setText(hopList.get(i).getName());
             hopAmountInput.setText(hopList.get(i).getAmount());
         }
+    }
+
+    private void getHopsOutOfLinearLayout(LinearLayout hopsLayout, Beer.HopsType hopsType){
+        int countHops = hopsLayout.getChildCount();
+        for(int i = 1; i < countHops; i++) {
+            LinearLayout hopsChild = (LinearLayout) hopsLayout.getChildAt(i);
+            EditText hopName = (EditText) hopsChild.getChildAt(0);
+            EditText hopAmount = (EditText) hopsChild.getChildAt(1);
+            Hops hops = new Hops();
+            if(!isEmpty(hopName) && !isEmpty(hopAmount)) {
+                hops.setName(hopName.getText().toString());
+                hops.setAmount(hopAmount.getText().toString());
+                tempBeer.setHops(hopsType, hops);
+            }
+        }
+    }
+
+    private boolean isEmpty(EditText editText) {
+        return (editText.getText().toString().trim().length() == 0);
+    }
+
+    private boolean isEmpty(TextView textView) {
+        return (textView.getText().toString().trim().length() == 0);
     }
 }
