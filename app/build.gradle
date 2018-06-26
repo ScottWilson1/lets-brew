@@ -32,8 +32,11 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-intents:3.0.1'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.google.code.gson:gson:2.8.0'
-    androidTestUtil 'com.android.support.test:orchestrator:1.0.2'
-    androidTestCompile 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
+    androidTestImplementation 'com.android.support.test:orchestrator:1.0.2'
+//    implementation 'com.applitools:eyes-android-espresso:1.6.0@aar'
+//    implementation 'com.applitools:eyes-android-common:1.6.0'
+//    implementation 'com.applitools:eyes-android-core:1.6.0'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'

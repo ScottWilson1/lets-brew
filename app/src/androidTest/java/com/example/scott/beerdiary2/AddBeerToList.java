@@ -1,8 +1,10 @@
 package com.example.scott.beerdiary2;
 
+import android.support.test.espresso.Espresso;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
 import android.widget.DatePicker;
 
 import org.hamcrest.Matchers;
@@ -13,6 +15,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.scrollTo;
+import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.PickerActions.setDate;
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
@@ -49,10 +52,10 @@ public class AddBeerToList {
         onView(allOf(withId(R.id.add_beer), withText("Add Beer"))).perform(click());
 
         //Enter beer name
-        onView(allOf(withId(R.id.beer_name_input))).perform(replaceText(beerName));
+        onView(withId(R.id.beer_name_input)).perform(replaceText(beerName));
 
         //Set brew date
-        onView(allOf(withId(R.id.brew_date_input))).perform(click());
+        onView(withId(R.id.brew_date_input)).perform(click());
         onView(withClassName(Matchers.equalTo(DatePicker.class.getName()))).perform(setDate(2018, 5, 3));
 
         onView(withText("OK"))
@@ -63,21 +66,24 @@ public class AddBeerToList {
         onData(allOf(is(instanceOf(String.class)), is("Wheat")))
                 .perform(click());
 
+        Espresso.closeSoftKeyboard();
+
         //Tap Save button
         onView(withId(R.id.save_button)).perform(scrollTo());
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (Exception e) {
         }
         onView(withId(R.id.save_button)).perform(click());
 
         //verify the beer entry exists
         try {
-            Thread.sleep(2000);
+            Thread.sleep(3000);
         } catch (Exception e) {
         }
 
         onView(withText(beerName)).check(matches(isDisplayed()));
         onView(nthChildOf(withId(R.id.rvBeers), 0)).check(matches(hasDescendant(withText(beerName))));
     }
+
 }
